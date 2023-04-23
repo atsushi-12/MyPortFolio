@@ -51,7 +51,7 @@ function FallbackMaterial({ url }) {
   return <meshBasicMaterial map={texture} toneMapped={false} />
 }
 function Ground() {
-  const [floor, normal,metalness] = useTexture(['/Metal028_8K_Roughness.jpg', '/Metal028_8K_NormalGL.jpg','Metal028_8K_Metalness.jpg'])
+  const [floor, normal,metalness] = useTexture(['/SurfaceImperfections003_1K_var1.jpg','/SurfaceImperfections003_1K_Normal.jpg'])
   return (
     <Reflector blur={[400, 100]} resolution={2048} args={[10, 10]} mirror={0.5} mixBlur={6} mixStrength={1.5} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
       {(Material, props) => <Material color="#a0a0a0" metalness={0.8} metalnessMap={metalness}roughnessMap={floor} normalMap={normal} normalScale={[1, 1]} {...props} />}
