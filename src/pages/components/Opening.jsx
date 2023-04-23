@@ -31,8 +31,8 @@ let vivusInstance = null;
   })
 },[]);
   return (
-  <div  ref={ finishRef }className="bg-green-400 absolute w-full h-full bg-black h-screen w-screen flex justify-center items-center">
-  <div  ref={ finishRef }className="absolute w-full h-full bg-black h-screen w-3/12 flex justify-center items-center">
+  <div  ref={ finishRef }className=" absolute w-screen h-full  flex justify-center items-center z-40 bg-black">
+  <div className="absolute  bg-black h-screen w-1/2 flex justify-center items-center">
     <img ref ={animation} src="/opening.svg" alt=""  className="display: inline-block absolute top-0 left-0 w-full h-full z-30;"/>
     <img ref={elementRef} src="welcome.svg" className="opacity-0 display:inline-block absolute top-0 left-0 w-full h-full z-10;"/>
   </div>
