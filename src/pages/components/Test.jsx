@@ -5,24 +5,22 @@ import { Reflector, Text, useTexture, useGLTF,useVideoTexture,useAspect } from '
 
 export default function Test() {
   return (
-    <Canvas style={{width:"100vw",height:"100vh"}}concurrent gl={{ alpha: false }} pixelRatio={[1, 1.5]} camera={{ position: [0, 3, 100], fov: 30 }}>
+    <Canvas style={{width:"100vw",height:"100vh"}}concurrent gl={{ alpha: false }} pixelRatio={[1, 1.5]} camera={{ position: [0, 3, 100], fov: 20 }}>
       <color attach="background" args={['black']} />
-      <fog attach="fog" args={['black', 15, 20]} />
+      <fog attach="fog" args={['black', 13, 25]} />
       <Suspense fallback={null}>
-        <group position={[0, -1, 0]}>
+        <group position={[2, -2, -2]}>
           <Scene/>
           <Ground />
         </group>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[0, 10, 0]} intensity={0.3} />
-        <directionalLight position={[-50, 0, -40]} intensity={0.7} />
+        <ambientLight intensity={1} color={"white"}/>
+        <spotLight position={[-4, 10, -4]} intensity={20} color={"orange"} />
+        <directionalLight position={[0, 6, 0]} intensity={5} color={"blue"} />
         <Intro />
       </Suspense>
     </Canvas>
   )
 }
-
-
 
 function Scene() {
   return (
@@ -36,14 +34,13 @@ function Scene() {
 
 function VideoMaterial({ url }) {
   const texture = useVideoTexture(url)
-  const text =  "hello world!"
-  return <Text   font={'/fonts/SomeFont.ttf'}
-  fontSize={3}
-  position={[0,2,0]}>
-  {text}
-  <meshBasicMaterial toneMapped={false} map={texture}>
-    </meshBasicMaterial>
-</Text>
+  const text =  "drei"
+  return <group>
+  <Text font="/DidactGothic-Regular.woff" fontSize={4} position={[0, 1.7, 0]}  materialProps={{ fontWeight: 'bold' }} letterSpacing={-0.07}>
+    {text}
+    <meshBasicMaterial toneMapped={false} map={texture} brightness={100} />
+  </Text>
+</group>
 }
 
 function FallbackMaterial({ url }) {
@@ -53,8 +50,8 @@ function FallbackMaterial({ url }) {
 function Ground() {
   const [floor, normal,metalness] = useTexture(['/SurfaceImperfections003_1K_var1.jpg','/SurfaceImperfections003_1K_Normal.jpg'])
   return (
-    <Reflector blur={[400, 100]} resolution={2048} args={[10, 10]} mirror={0.5} mixBlur={6} mixStrength={1.5} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
-      {(Material, props) => <Material color="#a0a0a0" metalness={0.8} metalnessMap={metalness}roughnessMap={floor} normalMap={normal} normalScale={[1, 1]} {...props} />}
+    <Reflector blur={[400, 600]} resolution={1024} args={[30, 30]} mirror={0.9} mixBlur={1.5} mixStrength={2} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
+      {(Material, props) => <Material color="#666666" metalness={0.9} roughness={0.1} roughnessMap={floor} normalMap={normal} normalScale={[1,1 ]} {...props} />}
     </Reflector>
   )
 }
@@ -62,7 +59,37 @@ function Ground() {
 function Intro() {
   const [vec] = useState(() => new THREE.Vector3())
   return useFrame((state) => {
-    state.camera.position.lerp(vec.set(state.mouse.x * 5, 3 + state.mouse.y * 2, 14), 0.05)
+    state.camera.position.lerp(vec.set(state.mouse.x * -5, 3 + state.mouse.y * 2, 14), 0.05)
     state.camera.lookAt(0, 0, 0)
   })
 }
+
+function FireSparkle() {
+  const materialRef = useRef()
+  const { viewport } = useThree()
+  const resolution = new Vector2(viewport.width, viewport.height)
+
+  useFrame(() => {
+    materialRef.current.uniforms.time.value += 0.1
+  })
+
+  return (
+    <mesh>
+      <planeBufferGeometry args={[viewport.width, viewport.height]} />
+      <shaderMaterial
+        ref={materialRef}
+        args={[
+          {
+            uniforms: {
+              time: { value: 0 },
+              resolution: { value: resolution },
+            },
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader,
+          },
+        ]}
+      />
+    </mesh>
+  )
+}
+

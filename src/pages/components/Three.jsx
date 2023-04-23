@@ -12,7 +12,7 @@ export default function Three() {
       <ambientLight intensity={0.5} />
         <spotLight position={[0, 10, 0]} intensity={0.3} />
         <directionalLight position={[-50, 0, -40]} intensity={0.7} />
-        <group position={[0, -2, 0]}>
+        <group position={[0, -2.5, 0]}>
           <VideoText position={[0, 1.0, 0]} />
           <Ground  />
         </group>
@@ -26,7 +26,7 @@ function VideoText(props) {
   const [video] = useState(() => Object.assign(document.createElement('video'), { src: '/bf1.mp4', crossOrigin: 'Anonymous', loop: true, muted: true }))
   useEffect(() => void video.play(), [video])
   return (
-    <Text font="/Inter-Bold.woff" fontSize={3} letterSpacing={-0.06} {...props}>
+    <Text font="/" fontSize={3} letterSpacing={-0.06} {...props}>
       Portfolio
       <meshBasicMaterial toneMapped={false}>
         <videoTexture attach="map" args={[video]} encoding={THREE.sRGBEncoding} />
