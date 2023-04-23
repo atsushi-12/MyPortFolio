@@ -1,11 +1,18 @@
 import * as THREE from 'three'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState,useRef} from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Reflector, Text, useTexture, useGLTF,useVideoTexture,useAspect } from '@react-three/drei'
-
+import { unmountComponentAtNode } from 'react-dom';
 export default function Test() {
-  return (
-    <Canvas style={{width:"100vw",height:"100vh"}}concurrent gl={{ alpha: false }} pixelRatio={[1, 1.5]} camera={{ position: [0, 3, 100], fov: 20 }}>
+  const canvasRef = useRef(null);
+  
+  useEffect(() => {
+    return () => {
+      // ページ遷移時にcanvasコンポーネントをアンマウントする
+    
+    };
+  }, []);
+  return (<>
       <color attach="background" args={['black']} />
       <fog attach="fog" args={['black', 13, 25]} />
       <Suspense fallback={null}>
@@ -18,7 +25,7 @@ export default function Test() {
         <directionalLight position={[0, 6, 0]} intensity={5} color={"blue"} />
         <Intro />
       </Suspense>
-    </Canvas>
+    </>
   )
 }
 
@@ -62,34 +69,5 @@ function Intro() {
     state.camera.position.lerp(vec.set(state.mouse.x * -5, 3 + state.mouse.y * 2, 14), 0.05)
     state.camera.lookAt(0, 0, 0)
   })
-}
-
-function FireSparkle() {
-  const materialRef = useRef()
-  const { viewport } = useThree()
-  const resolution = new Vector2(viewport.width, viewport.height)
-
-  useFrame(() => {
-    materialRef.current.uniforms.time.value += 0.1
-  })
-
-  return (
-    <mesh>
-      <planeBufferGeometry args={[viewport.width, viewport.height]} />
-      <shaderMaterial
-        ref={materialRef}
-        args={[
-          {
-            uniforms: {
-              time: { value: 0 },
-              resolution: { value: resolution },
-            },
-            vertexShader: vertexShader,
-            fragmentShader: fragmentShader,
-          },
-        ]}
-      />
-    </mesh>
-  )
 }
 

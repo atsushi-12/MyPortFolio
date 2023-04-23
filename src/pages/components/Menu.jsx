@@ -31,16 +31,16 @@ export const Menu = () => {
 
     // Googleのトップページに遷移する
     if(e===0){
-      return
+      router.push("/portfolio")
     }else if(e===1){
-      return
+      router.push("/test")
     }else if(e === 2){
       router.push('https://github.com/atsushi-12')
     }
   }
   
   return (
-    <div className="absolute w-full h-full flex justify-left z-40 text-white text-7xl font-fancy ml-6 mt-2 pointer-events-none">
+    <div className="absolute w-full h-full flex justify-left z-40 text-white text-7xl font-fancy ml-6 mt-2 pointer-events-none hidden-scrollbar">
       <ul className="color: inherit font-size: 4rem  mb-0">
         <p className=" ">Atsushi Yamano</p>
         <p className=" text-4xl text-gray-500 opacity: 0.2;">

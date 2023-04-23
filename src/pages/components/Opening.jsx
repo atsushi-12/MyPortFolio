@@ -25,7 +25,7 @@ let vivusInstance = null;
       opacity:0,
       duration:2,
       onComplete: () => {
-        finishRef.current.remove();
+        finishRef.current.style.display = "none";
       },
     })},
   })

@@ -3,8 +3,17 @@ import { Canvas, useFrame,extend } from "@react-three/fiber";
 import { Reflector, Text, useTexture, useGLTF,MeshReflectorMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { Stats } from '@react-three/drei'
+import { unmountComponentAtNode } from 'react-dom';
+
 
 export default function Three() {
+  const canvasRef = useRef();
+  useEffect(() => {
+    return () => {
+      // ページ遷移時にcanvasコンポーネントをアンマウントする
+    
+    };
+  }, []);
   return (
     <Canvas style={{width:"100vw",height:"100vh"}}  concurrent gl={{ alpha: false }} pixelRatio={[1, 1.5]} camera={{ position: [0, 10, -10], fov: 40}}>
     <color attach="background" args={['black']} />
