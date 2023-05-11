@@ -1,12 +1,11 @@
-
 import { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export const Menu = () => {
   const refs = [useRef(null), useRef(null), useRef(null)];
   const [isHovered, setIsHovered] = useState([false, false, false]);
- const router = useRouter()
+  const router = useRouter();
   const handleHover = (index) => {
     setIsHovered((prevIsHovered) =>
       prevIsHovered.map((_, i) => (i === index ? true : false))
@@ -26,31 +25,29 @@ export const Menu = () => {
       duration: 0.4,
     });
   };
-  const push = (e) =>{
-   
-
+  const push = (e) => {
     // Googleのトップページに遷移する
-    if(e===0){
-      router.push("/portfolio")
-    }else if(e===1){
-      router.push("/test")
-    }else if(e === 2){
-      router.push('https://github.com/atsushi-12')
+    if (e === 0) {
+      router.push("/portfolio");
+    } else if (e === 1) {
+      router.push("/test");
+    } else if (e === 2) {
+      router.push("https://github.com/atsushi-12");
     }
-  }
-  
+  };
+
   return (
     <div className="absolute w-full h-full flex justify-left z-40 text-white text-7xl font-fancy ml-6 mt-2 pointer-events-none hidden-scrollbar">
       <ul className="color: inherit font-size: 4rem  mb-0">
         <p className=" ">Atsushi Yamano</p>
         <p className=" text-4xl text-gray-500 opacity: 0.2;">
-          Souzousya-RicarentSchool
+          SouzouSya-RecurrentSchool
         </p>
         <ul className="text-gray-400 text-4xl flex-col space-y-5 mt-10 pointer-events-auto">
           {["Portfolio", "Skills", "GitHub"].map((item, index) => (
             <div key={index}>
               <li
-                className="m-0 p-0 hover:cursor-pointer"
+                className="m-0 p-0 hover:cursor-pointer hover:text-white"
                 onMouseEnter={() => handleHover(index)}
                 onMouseLeave={() => handleLeave(index)}
                 onClick={() => push(index)}
@@ -68,4 +65,4 @@ export const Menu = () => {
     </div>
   );
 };
-export default Menu
+export default Menu;
