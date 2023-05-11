@@ -24,9 +24,9 @@ export const test = () => {
   return (
     <div className="flex justify-center bg-black text-white">
       <div className="relative text-6xl flex-col justify-center h-screen w-1/5 bg-black text-center">
-        <p className="mt-10">メニュー画面</p>
+        <p className="mt-10">Menu</p>
         <p className="text-5xl absolute bottom-20 text-center left-4">
-          前のページに戻る
+          return to previous page
         </p>
       </div>
 
