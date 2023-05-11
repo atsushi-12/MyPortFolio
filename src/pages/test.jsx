@@ -1,10 +1,9 @@
 import React from "react";
 import { gsap } from "gsap";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 export const test = () => {
   const array = ["Language", "Framework", "Cloud", "Other"];
   const language = ["JavaScript", "TypeScript", "Python", "Java"];
-  const [ref, SetRef] = useState([]);
 
   const move = (e, g) => {
     console.log(e);
