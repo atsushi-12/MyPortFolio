@@ -29,7 +29,7 @@ export default function Test() {
         </group>
         <ambientLight intensity={1} color={"white"} />
         <spotLight position={[-4, 10, -4]} intensity={20} color={"orange"} />
-        <directionalLight position={[0, 6, 0]} intensity={7j} color={"blue"} />
+        <directionalLight position={[0, 6, 0]} intensity={7} color={"blue"} />
         <Intro />
       </Suspense>
     </>
@@ -41,7 +41,7 @@ function Scene() {
     <mesh>
       <Suspense fallback={<FallbackMaterial url="welcome.svg" />}>
         <VideoMaterial url="bf1.mp4" />
-        <VideoMaterial2 url="bf3.mp4" />
+        <VideoMaterial2 url="bf1.mp4" />
       </Suspense>
     </mesh>
   );
