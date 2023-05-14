@@ -7,4 +7,4 @@ This is a self-introduction site using drei and R3f.
 - Next.js
 ## Reference
 I referred mainly to the drei documentation for 3D related technology.  
-[Drei Doqumnt](https://github.com/pmndrs/drei)
+[pmndrs/drei: 🥉 useful helpers for react-three-fiber](https://github.com/pmndrs/drei)
